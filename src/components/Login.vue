@@ -26,7 +26,7 @@ export default Vue.extend({
   data: () => ({ username: '', password: '' }),
   methods: {
     finalizeLogin(): string {
-      const ret = '{ "name": "' + this.username + '", "password": "' + this.password + '" }';
+      const ret = `{ "name": "${this.username}", "password": "${this.password}" }`;
       this.username = '';
       this.password = '';
       return ret;

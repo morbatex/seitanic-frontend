@@ -43,7 +43,7 @@ export default Vue.extend({
   methods: {
     getUsertype() {
       const self = this;
-      fetch('/user/me', {
+      fetch('/api/user/me', {
         credentials: 'include',
       })
         .then(response => response.json())
@@ -52,7 +52,7 @@ export default Vue.extend({
         });
     },
     login(user: string) {
-      fetch('/login', {
+      fetch('/api/login', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
@@ -67,7 +67,7 @@ export default Vue.extend({
         });
     },
     postDish(dish: string) {
-      fetch('/dish', {
+      fetch('/api/dish', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',

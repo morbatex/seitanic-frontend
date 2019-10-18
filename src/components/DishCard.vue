@@ -37,7 +37,7 @@ export default Vue.extend({
   watch: {
     overlay() {
       if (this.overlay) {
-        this.$router.push({ path: '/' + this.dish._id.$oid, query: this.$route.query });
+        this.$router.push({ path: `/${this.dish._id.$oid}`, query: this.$route.query });
       } else {
         this.$router.push({ path: '/', query: this.$route.query });
       }
