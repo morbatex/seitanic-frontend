@@ -8,7 +8,7 @@
     </h2>
     <Ingredient v-bind:ingredients="dish.ingredients" style="max-width: 500px;"></Ingredient>
     <h3 class="mt-3">Instructions:</h3>
-    <p>{{ dish.instruction }}</p>
+    <p style="white-space: pre-line">{{ dish.instruction }}</p>
   </v-container>
 </template>
 
