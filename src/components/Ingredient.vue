@@ -2,11 +2,9 @@
   <v-simple-table>
     <tbody>
       <tr v-for="(ingredient,index) in ingredients" :key="ingredient.name">
-        <div v-if="index < (amount ? amount : ingredients.length)">
-          <td class="ma-auto pa-auto">{{ ingredient.name }}</td>
-          <td class="ma-auto pa-auto">{{ ingredient.amount }}</td>
-          <td class="ma-auto pa-auto">{{ ingredient.unit }}</td>
-        </div>
+        <td v-if="index < (amount ? amount : ingredients.length)" class="ma-auto pa-auto">{{ ingredient.name }}</td>
+        <td v-if="index < (amount ? amount : ingredients.length)" class="ma-auto pa-auto">{{ ingredient.amount }}</td>
+        <td v-if="index < (amount ? amount : ingredients.length)" class="ma-auto pa-auto">{{ ingredient.unit }}</td>
       </tr>
     </tbody>
   </v-simple-table>
