@@ -6,9 +6,9 @@
         <div v-if="index === dish.chefs.length - 1">&nbsp;{{ chef.name }}</div>
       </div>
     </v-card-title>
-    <Ingredient v-bind:ingredients="dish.ingredients"></Ingredient>
+    <Ingredient v-bind:amount="4" v-bind:ingredients="dish.ingredients"></Ingredient>
     <v-dialog v-model="overlay" width="1200">
-        <Dish style="background: #303030" v-bind:dish="dish"></Dish>
+      <Dish style="background: #303030" v-bind:dish="dish"></Dish>
     </v-dialog>
   </v-card>
 </template>
