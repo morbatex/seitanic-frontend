@@ -1,6 +1,6 @@
 <template>
   <v-layout  class="ma-2" wrap>
-    <v-flex d-flex v-for="dish in dishes" v-bind:key="dish.name">
+    <v-flex d-flex v-for="(dish,index) in dishes" v-bind:key="index">
       <DishCard v-bind:dish="dish"></DishCard>
     </v-flex>
   </v-layout>
