@@ -1,6 +1,5 @@
 <template>
     <v-container flow>
-      <h2>Dishes:</h2>
       <v-btn v-on:click="filter = true" text>
         Filter
       </v-btn>
