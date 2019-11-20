@@ -1,6 +1,6 @@
 <template>
   <v-card v-on:click="overlay = true" class="mt-2 pa-auto" style="width: 250px" >
-    <v-card-title>{{ dish.name }} by
+    <v-card-title style="word-break: break-word">{{ dish.name }} by
       <div v-for="(chef,index) in dish.chefs" v-bind:key="index">
         <div v-if="index !== dish.chefs.length - 1">&nbsp;{{ chef.name }} &amp;</div>
         <div v-if="index === dish.chefs.length - 1">&nbsp;{{ chef.name }}</div>
