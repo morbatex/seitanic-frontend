@@ -1,9 +1,11 @@
 <template>
-  <v-layout  class="ma-2" wrap>
-    <v-flex d-flex v-for="(dish,index) in dishes" v-bind:key="index">
-      <DishCard v-bind:dish="dish"></DishCard>
-    </v-flex>
-  </v-layout>
+  <v-container fluid>
+    <v-row>
+      <v-col v-for="(dish, index) in dishes" :key="index">
+        <DishCard v-bind:dish="dish"></DishCard>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">

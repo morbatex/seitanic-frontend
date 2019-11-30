@@ -1,12 +1,18 @@
 <template>
-  <v-card v-on:click="overlay = true" class="mt-2 pa-auto" style="width: 250px" >
+  <v-card v-on:click="overlay = true" :hover=true style="width: 250px" >
     <v-card-title style="word-break: break-word">{{ dish.name }} by
       <div v-for="(chef,index) in dish.chefs" v-bind:key="index">
         <div v-if="index !== dish.chefs.length - 1">&nbsp;{{ chef.name }} &amp;</div>
         <div v-if="index === dish.chefs.length - 1">&nbsp;{{ chef.name }}</div>
       </div>
     </v-card-title>
-    <Ingredient v-bind:amount="4" v-bind:ingredients="dish.ingredients"></Ingredient>
+    <v-simple-table>
+      <tbody>
+        <tr v-for="(ingredient, index) in dish.ingredients" :key="index">
+            <td v-if="index <=4">{{ ingredient.name }}</td>
+        </tr>
+      </tbody>
+    </v-simple-table>
     <v-dialog v-model="overlay" width="1200">
       <Dish style="background: #303030" v-bind:dish="dish"></Dish>
     </v-dialog>
@@ -16,13 +22,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Ingredient from './Ingredient.vue';
 import Dish from './Dish.vue';
 
 export default Vue.extend({
   name: 'App',
   components: {
-    Ingredient,
     Dish,
   },
   created() {
