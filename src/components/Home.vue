@@ -6,7 +6,7 @@
       <v-dialog v-model="filter" width="1200">
         <Query style="background: #303030" v-bind:query="query" v-on:finalized-query="queryDishes"></Query>
       </v-dialog>
-      <DishView v-bind:dishes="dishes"></DishView>
+      <DishView v-bind:userType="userType" v-bind:dishes="dishes"></DishView>
     </v-container>
 </template>
 
@@ -62,6 +62,6 @@ export default Vue.extend({
         });
     },
   },
-  props: ['query'],
+  props: ['query', 'userType'],
 });
 </script>

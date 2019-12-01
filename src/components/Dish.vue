@@ -5,13 +5,13 @@
         <p v-if="index !== dish.chefs.length - 1"><a v-bind:href="'/?chef='+chef.name" style="display: inline">{{ chef.name }}</a> &amp;&nbsp;</p>
         <a v-bind:href="'/?chef='+chef.name" style="display: inline" v-if="index === dish.chefs.length - 1">{{ chef.name }}</a>
       </div>
-      <v-btn class="float-right" v-on:click="edit = true">Edit</v-btn>
+      <v-btn v-if="userType !== 'UNKNOWN'" class="float-right" v-on:click="edit = true">Edit</v-btn>
     </h2>
     <Ingredient v-bind:ingredients="dish.ingredients" style="max-width: 500px;"></Ingredient>
     <h3 class="mt-3">Instructions:</h3>
     <p style="white-space: pre-line">{{ dish.instruction }}</p>
     <v-dialog v-model="edit" width="1200">
-      <DishCreator style="background: #303030" v-bind:dish="dish" v-on:finalized-dish="postDish"></DishCreator>
+      <DishCreator style="background: #303030" v-bind:dish="dish" v-bind:edit="true" v-on:finalized-dish="putDish"></DishCreator>
     </v-dialog>
   </v-container>
 </template>
@@ -29,7 +29,7 @@ export default Vue.extend({
     DishCreator,
   },
   methods: {
-    postDish(dish: string, id: string) {
+    putDish(dish: string, id: string) {
       fetch(`/api/dish/${this.dish._id.$oid}`, {
         method: 'PUT',
         mode: 'cors',
@@ -48,6 +48,6 @@ export default Vue.extend({
   data: () => ({
     edit: false,
   }),
-  props: ['dish'],
+  props: ['dish', 'userType'],
 });
 </script>

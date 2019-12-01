@@ -27,7 +27,8 @@
   <v-container fluid>
       <v-textarea auto-grow v-model="instruction" prefix="Instructions:"></v-textarea>
   </v-container>
-    <v-btn v-on:click="$emit('finalized-dish', finalizeDish())">Add Dish</v-btn>
+    <v-btn v-if="!edit" v-on:click="$emit('finalized-dish', finalizeDish())">Add Dish</v-btn>
+    <v-btn v-if="edit" v-on:click="$emit('finalized-dish', finalizeDish())">Edit Dish</v-btn>
   </v-container>
 </template>
 
@@ -71,6 +72,10 @@ export default Vue.extend({
       default: () => ({
         name: '', chefs: [], ingredients: [{ name: '', amount: '', unit: '' }], instruction: '',
       }),
+    },
+    edit: {
+      type: Boolean,
+      default: false,
     },
   },
 });
