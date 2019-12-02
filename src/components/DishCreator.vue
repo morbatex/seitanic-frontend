@@ -39,7 +39,7 @@
           <v-textarea auto-grow v-model="instruction"></v-textarea>
         </v-tab-item>
         <v-tab-item>
-          <VueMarkdown>{{ instruction }}</VueMarkdown>
+          <VueMarkdown v-bind:source="instruction"></VueMarkdown>
         </v-tab-item>
       </v-tabs-items>
     </v-container>
