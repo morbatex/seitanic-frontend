@@ -15,6 +15,9 @@
     <v-content>
       <router-view v-bind:userType="userType"></router-view>
     </v-content>
+    <v-footer>
+      <p>Visit the Repository on <a href="https://github.com/morbatex/seitanic-cookbook" target="_blank">Github</a></p>
+    </v-footer>
   </v-app>
 </template>
 
@@ -43,7 +46,7 @@ export default Vue.extend({
         });
     },
     login(user: string) {
-      fetch('/api/login', {
+      fetch('/api:12345/login', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',

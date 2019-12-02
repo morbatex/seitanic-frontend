@@ -9,7 +9,7 @@
     </h2>
     <Ingredient v-bind:ingredients="dish.ingredients" style="max-width: 500px;"></Ingredient>
     <h3 class="mt-3">Instructions:</h3>
-    <p style="white-space: pre-line">{{ dish.instruction }}</p>
+    <VueMarkdown>{{ dish.instruction }}</VueMarkdown>
     <v-dialog v-model="edit" width="1200">
       <DishCreator style="background: #303030" v-bind:dish="dish" v-bind:edit="true" v-on:finalized-dish="putDish"></DishCreator>
     </v-dialog>
@@ -19,6 +19,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
+// @ts-ignore
+import VueMarkdown from 'vue-markdown-v2';
 import Ingredient from './Ingredient.vue';
 import DishCreator from './DishCreator.vue';
 
@@ -27,6 +29,7 @@ export default Vue.extend({
   components: {
     Ingredient,
     DishCreator,
+    VueMarkdown,
   },
   methods: {
     putDish(dish: string, id: string) {
