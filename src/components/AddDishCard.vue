@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import DishCreator  from './DishCreator.vue';
+import DishCreator from './DishCreator.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -19,7 +19,7 @@ export default Vue.extend({
   },
   methods: {
     postDish(dish: string) {
-      fetch(`/api/dish`, {
+      fetch('/api/dish', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',

@@ -46,7 +46,7 @@ export default Vue.extend({
         });
     },
     login(user: string) {
-      fetch('/api:12345/login', {
+      fetch('/api/login', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
