@@ -37,7 +37,7 @@ export default Vue.extend({
   methods: {
     getUsertype() {
       const self = this;
-      fetch('/api/user/me', {
+      fetch(`${process.env.VUE_APP_API_URL}/user/me`, {
         credentials: 'include',
       })
         .then(response => response.json())
@@ -46,7 +46,7 @@ export default Vue.extend({
         });
     },
     login(user: string) {
-      fetch('/api/login', {
+      fetch(`${process.env.VUE_APP_API_URL}/login`, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',

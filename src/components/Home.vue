@@ -55,7 +55,7 @@ export default Vue.extend({
           name: query.name, chef: query.chef, ingredients: query.ingredients, exgredients: query.exgredients,
         },
       });
-      fetch(`/api/dish${encodeURI(queryString)}`)
+      fetch(`${process.env.VUE_APP_API_URL}/dish${encodeURI(queryString)}`)
         .then(response => response.json())
         .then((myJson) => {
           self.dishes = myJson;

@@ -19,7 +19,7 @@ export default Vue.extend({
   },
   methods: {
     postDish(dish: string) {
-      fetch('/api/dish', {
+      fetch(`${process.env.VUE_APP_API_URL}/dish`, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
