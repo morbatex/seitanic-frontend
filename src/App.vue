@@ -16,7 +16,7 @@
       <router-view v-bind:userType="userType"></router-view>
     </v-content>
     <v-footer>
-      <p>Visit the Repository on <a href="https://github.com/morbatex/seitanic-cookbook" target="_blank">Github</a></p>
+      <p>Visit the Repository on <a href="https://github.com/morbatex/seitanic-frontend" target="_blank">Github</a></p>
     </v-footer>
   </v-app>
 </template>
