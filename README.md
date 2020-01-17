@@ -1,5 +1,8 @@
 # seitanic-frontend
 
+Frontend for the [seitanic-cookbook](https://github.com/morbatex/seitanic-cookbook/) -- the selfhostable cookbook
+
+
 ## Project setup
 ```
 npm install
@@ -15,15 +18,7 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
-
 ### Lints and fixes files
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
