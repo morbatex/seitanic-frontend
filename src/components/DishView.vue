@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row>  
+    <v-row>
       <v-col v-if="userType !== 'UNKNOWN'">
         <AddDishCard ></AddDishCard>
       </v-col>
