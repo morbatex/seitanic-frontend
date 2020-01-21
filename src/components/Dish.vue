@@ -8,6 +8,10 @@
       <v-btn v-if="userType !== 'UNKNOWN'" class="float-right" v-on:click="edit = true">Edit</v-btn>
     </h2>
     <Ingredient v-bind:ingredients="dish.ingredients" style="max-width: 500px;"></Ingredient>
+    <div v-for="(namedIngredient, index) in dish.namedIngredients" v-bind:key="index">
+        <h3 class="mt-3">{{ namedIngredient.name }}</h3>
+        <Ingredient v-bind:ingredients="namedIngredient.ingredients" style="max-width: 500px;"></Ingredient>
+    </div>
     <h3 class="mt-3">Instructions:</h3>
     <VueMarkdown>{{ dish.instruction }}</VueMarkdown>
     <v-dialog v-model="edit" width="1200">
