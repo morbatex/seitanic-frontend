@@ -35,7 +35,6 @@ export default Vue.extend({
     Dish,
   },
   created() {
-    // eslint-disable-next-line no-underscore-dangle
     if (this.$route.params.oid === this.dish._id.$oid) {
       this.overlay = true;
     }
@@ -47,7 +46,6 @@ export default Vue.extend({
   watch: {
     overlay() {
       if (this.overlay) {
-        // eslint-disable-next-line no-underscore-dangle
         this.$router.push({ path: `/${this.dish._id.$oid}`, query: this.$route.query });
       } else {
         this.$router.push({ path: '/', query: this.$route.query });

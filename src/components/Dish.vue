@@ -37,7 +37,6 @@ export default Vue.extend({
   },
   methods: {
     putDish(dish: string, id: string) {
-      // eslint-disable-next-line no-underscore-dangle
       fetch(`${process.env.VUE_APP_API_URL}/dish/${this.dish._id.$oid}`, {
         method: 'PUT',
         mode: 'cors',
