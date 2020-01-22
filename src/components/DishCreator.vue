@@ -123,7 +123,7 @@ export default Vue.extend({
     // @ts-ignore
     this.chefs = this.dish.chefs.map(x => x.name);
     this.ingredients = [...this.dish.ingredients];
-    this.namedIngredients = this.dish.namedIngredients !== null ? [...this.dish.namedIngredients] : [];
+    this.namedIngredients = this.dish.namedIngredients != null ? [...this.dish.namedIngredients] : [];
     this.instruction = this.dish.instruction;
     if (!this.ingredients.length) {
       this.ingredients.push({ name: '', amount: '', unit: '' });
@@ -150,7 +150,7 @@ export default Vue.extend({
     },
     finalizeDish(): string {
       const dish = JSON.stringify({
-        name: this.name, chefs: this.chefs.map(chef => ({ name: chef })), ingredients: this.ingredients, namedIngredients: this.namedIngredients, instruction: this.instruction,
+        name: this.name, chefs: this.chefs.map(chef => ({ name: chef })), ingredients: this.ingredients.filter(ingredient => ingredient.name !== '' || ingredient.amount !== '' || ingredient.unit !== ''), namedIngredients: this.namedIngredients, instruction: this.instruction,
       });
       this.name = '';
       this.chefs = [];
