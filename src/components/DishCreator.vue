@@ -39,10 +39,10 @@
         </v-row>
       </v-card>
     </draggable>
-    <div style="margin-left: 50px; margin-bottom: 15px;" v-for="(namedIngredient, namedIngredientIndex) in namedIngredients" v-bind:key="namedIngredientIndex">
+    <div style="margin-bottom: 15px;" v-for="(namedIngredient, namedIngredientIndex) in namedIngredients" v-bind:key="namedIngredientIndex">
       <v-divider></v-divider>
       <v-text-field v-model="namedIngredient.name" prefix="Name:"></v-text-field>
-      <draggable v-model="namedIngredient.ingredients">
+      <draggable style="margin-left: 30px" v-model="namedIngredient.ingredients">
         <v-card v-for="(ingredient, index) in namedIngredient.ingredients" v-bind:key="index*1" :hover=true style="cursor: ns-resize;">
           <v-row>
             <v-col>
