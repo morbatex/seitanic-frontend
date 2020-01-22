@@ -123,7 +123,7 @@ export default Vue.extend({
     // @ts-ignore
     this.chefs = this.dish.chefs.map(x => x.name);
     this.ingredients = [...this.dish.ingredients];
-    this.namedIngredients = [...this.dish.namedIngredients];
+    this.namedIngredients = this.dish.namedIngredients !== null ? [...this.dish.namedIngredients] : [];
     this.instruction = this.dish.instruction;
     if (!this.ingredients.length) {
       this.ingredients.push({ name: '', amount: '', unit: '' });
