@@ -73,7 +73,6 @@
           </v-row>
         </v-card>
       </draggable>
-      <v-btn v-on:click="deleteNamedIngredientGroup(namedIngredientIndex)" style="margin-top: 15px">Delete this Ingredient Group</v-btn>
     </div>
     <v-btn v-on:click="addNamedIngredientGroup()">Add Ingredient Group</v-btn>
     <v-container fluid>
@@ -126,6 +125,9 @@ export default Vue.extend({
     this.ingredients = [...this.dish.ingredients];
     this.namedIngredients = [...this.dish.namedIngredients];
     this.instruction = this.dish.instruction;
+    if (!this.ingredients.length) {
+      this.ingredients.push({ name: '', amount: '', unit: '' });
+    }
   },
   methods: {
     addIngredient() {
@@ -142,9 +144,9 @@ export default Vue.extend({
     },
     deleteNamedIngredient(namedIndex: number, index: number) {
       this.namedIngredients[namedIndex].ingredients.splice(index, 1);
-    },
-    deleteNamedIngredientGroup(index: number) {
-      this.namedIngredients.splice(index, 1);
+      if (!this.namedIngredients[namedIndex].ingredients.length) {
+        this.namedIngredients.splice(namedIndex, 1);
+      }
     },
     finalizeDish(): string {
       const dish = JSON.stringify({
