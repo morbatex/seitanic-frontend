@@ -33,7 +33,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-
+import { mapGetters, mapActions } from 'vuex';
+import QueryModel from '@/models/QueryModel';
 
 export default Vue.extend({
   data: () => {
@@ -43,25 +44,16 @@ export default Vue.extend({
       name: '', chef: '', ingredients: ingr, exgredients: exgr,
     };
   },
+  computed: {
+    ...mapGetters({
+      query: 'getQuery',
+    }),
+  },
   created() {
-    if (this.query) {
-      if (typeof this.query.name === 'string') {
-        this.name = this.query.name;
-      }
-      if (typeof this.query.chef === 'string') {
-        this.chef = this.query.chef;
-      }
-      if (Array.isArray(this.query.ingredients)) {
-        this.ingredients = this.query.ingredients;
-      } else if (typeof this.query.ingredients === 'string') {
-        this.ingredients.push(this.query.ingredients);
-      }
-      if (Array.isArray(this.query.exgredients)) {
-        this.exgredients = this.query.exgredients;
-      } else if (typeof this.query.exgredients === 'string') {
-        this.exgredients.push(this.query.exgredients);
-      }
-    }
+    this.name = this.query.name;
+    this.chef = this.query.chef;
+    this.ingredients = [...this.query.ingredients];
+    this.exgredients = [...this.query.exgredients];
   },
   methods: {
     remove_ingredient(item: string) {
@@ -70,14 +62,17 @@ export default Vue.extend({
     remove_exgredient(item: string) {
       this.exgredients.splice(this.exgredients.indexOf(item), 1);
     },
-    finalizeQuery(): Object {
-      return {
-        name: this.name, chef: this.chef, ingredients: this.ingredients, exgredients: this.exgredients,
-      };
+    finalizeQuery() {
+      const q = new QueryModel();
+      q.name = this.name;
+      q.chef = this.chef;
+      q.ingredients = this.ingredients;
+      q.exgredients = this.exgredients;
+      this.updateDishes(q);
     },
-  },
-  props: {
-    query: Object,
+    ...mapActions({
+      updateDishes: 'updateDishes',
+    }),
   },
 });
 </script>

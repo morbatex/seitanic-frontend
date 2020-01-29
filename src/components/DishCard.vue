@@ -19,7 +19,7 @@
       </tbody>
     </v-simple-table>
     <v-dialog v-model="overlay" width="1200">
-      <Dish style="background: #303030" v-bind:userType="userType" v-bind:dish="dish"></Dish>
+      <Dish style="background: #303030" v-bind:dish="dish"></Dish>
     </v-dialog>
   </v-card>
 </template>
@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Dish from './Dish.vue';
+import Dish from '@/components/Dish.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -42,7 +42,12 @@ export default Vue.extend({
   data: () => ({
     overlay: false,
   }),
-  props: ['dish', 'userType'],
+  props: {
+    dish: {
+      type: Object,
+      required: true,
+    },
+  },
   watch: {
     overlay() {
       if (this.overlay) {

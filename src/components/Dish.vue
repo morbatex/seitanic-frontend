@@ -15,7 +15,7 @@
     <h3 class="mt-3">Instructions:</h3>
     <VueMarkdown>{{ dish.instruction }}</VueMarkdown>
     <v-dialog v-model="edit" width="1200">
-      <DishCreator style="background: #303030" v-bind:dish="dish" v-bind:edit="true" v-on:finalized-dish="putDish"></DishCreator>
+      <DishCreator style="background: #303030" v-bind:dish="dish" v-bind:edit="true" v-on:finalized-dish="closeEdit"></DishCreator>
     </v-dialog>
   </v-container>
 </template>
@@ -25,8 +25,9 @@
 import Vue from 'vue';
 // @ts-ignore
 import VueMarkdown from 'vue-markdown-v2';
-import Ingredient from './Ingredient.vue';
-import DishCreator from './DishCreator.vue';
+import { mapGetters } from 'vuex';
+import Ingredient from '@/components/Ingredient.vue';
+import DishCreator from '@/components/DishCreator.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -35,26 +36,24 @@ export default Vue.extend({
     DishCreator,
     VueMarkdown,
   },
-  methods: {
-    putDish(dish: string, id: string) {
-      fetch(`${process.env.VUE_APP_API_URL}/dish/${this.dish._id.$oid}`, {
-        method: 'PUT',
-        mode: 'cors',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: dish,
-      })
-        .then(() => {
-          this.edit = false;
-          window.location.reload();
-        });
-    },
+  computed: {
+    ...mapGetters({
+      userType: 'getUserType',
+    }),
   },
   data: () => ({
     edit: false,
   }),
-  props: ['dish', 'userType'],
+  methods: {
+    closeEdit() {
+      this.edit = false;
+    },
+  },
+  props: {
+    dish: {
+      type: Object,
+      required: true,
+    },
+  },
 });
 </script>

@@ -5,7 +5,7 @@
         <AddDishCard ></AddDishCard>
       </v-col>
       <v-col v-for="(dish, index) in dishes" :key="index">
-        <DishCard v-bind:userType="userType" v-bind:dish="dish"></DishCard>
+        <DishCard v-bind:dish="dish"></DishCard>
       </v-col>
     </v-row>
   </v-container>
@@ -13,8 +13,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import DishCard from './DishCard.vue';
-import AddDishCard from './AddDishCard.vue';
+import { mapGetters } from 'vuex';
+import DishCard from '@/components/DishCard.vue';
+import AddDishCard from '@/components/AddDishCard.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -22,6 +23,11 @@ export default Vue.extend({
     DishCard,
     AddDishCard,
   },
-  props: ['dishes', 'userType'],
+  computed: {
+    ...mapGetters({
+      userType: 'getUserType',
+      dishes: 'getDishes',
+    }),
+  },
 });
 </script>

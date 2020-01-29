@@ -105,11 +105,15 @@ import Vue from 'vue';
 import VueMarkdown from 'vue-markdown-v2';
 // @ts-ignore
 import draggable from 'vuedraggable';
+import { mapGetters, mapActions } from 'vuex';
+import DishModel from '@/models/DishModel';
+import IngredientModel from '@/models/IngredientModel';
+import NamedIngredientModel from '@/models/NamedIngredientModel';
 
 export default Vue.extend({
   data: () => {
-    const ing = [{ name: '', amount: '', unit: '' }];
-    const named: any[] = [];
+    const ing = [new IngredientModel()];
+    const named: NamedIngredientModel[] = [];
     return {
       name: '', chefs: [], ingredients: ing, namedIngredients: named, instruction: '', tab: null,
     };
@@ -117,6 +121,11 @@ export default Vue.extend({
   components: {
     VueMarkdown,
     draggable,
+  },
+  computed: {
+    ...mapGetters({
+      query: 'getQuery',
+    }),
   },
   mounted() {
     this.name = this.dish.name;
@@ -126,18 +135,18 @@ export default Vue.extend({
     this.namedIngredients = this.dish.namedIngredients != null ? [...this.dish.namedIngredients] : [];
     this.instruction = this.dish.instruction;
     if (!this.ingredients.length) {
-      this.ingredients.push({ name: '', amount: '', unit: '' });
+      this.ingredients.push(new IngredientModel());
     }
   },
   methods: {
     addIngredient() {
-      this.ingredients.push({ name: '', amount: '', unit: '' });
+      this.ingredients.push(new IngredientModel());
     },
     addNamedIngredient(index: number) {
-      this.namedIngredients[index].ingredients.push({ name: '', amount: '', unit: '' });
+      this.namedIngredients[index].ingredients.push(new IngredientModel());
     },
     addNamedIngredientGroup() {
-      this.namedIngredients.push({ name: '', ingredients: [{ name: '', amount: '', unit: '' }] });
+      this.namedIngredients.push(new NamedIngredientModel());
     },
     deleteIngredient(index: number) {
       this.ingredients.splice(index, 1);
@@ -148,25 +157,49 @@ export default Vue.extend({
         this.namedIngredients.splice(namedIndex, 1);
       }
     },
-    finalizeDish(): string {
+    finalizeDish() {
       const dish = JSON.stringify({
         name: this.name, chefs: this.chefs.map(chef => ({ name: chef })), ingredients: this.ingredients.filter(ingredient => ingredient.name !== '' || ingredient.amount !== '' || ingredient.unit !== ''), namedIngredients: this.namedIngredients, instruction: this.instruction,
       });
-      this.name = '';
-      this.chefs = [];
-      this.instruction = '';
-      const ing = [{ name: '', amount: '', unit: '' }];
-      this.ingredients = ing;
-      this.namedIngredients = [];
-      return dish;
+      let path = `${process.env.VUE_APP_API_URL}/dish`;
+      let options: RequestInit;
+      if (this.edit) {
+        path = `${path}/${this.dish._id.$oid}`;
+        options = {
+          method: 'PUT',
+          mode: 'cors',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: dish,
+        };
+      } else {
+        options = {
+          method: 'POST',
+          mode: 'cors',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: dish,
+        };
+        this.name = '';
+        this.chefs = [];
+        this.instruction = '';
+        this.ingredients = [new IngredientModel()];
+        this.namedIngredients = [];
+      }
+      fetch(path, options).then(() => this.updateDishes(this.query));
     },
+    ...mapActions({
+      updateDishes: 'updateDishes',
+    }),
   },
   props: {
     dish: {
       type: Object,
-      default: () => ({
-        name: '', chefs: [], ingredients: [{ name: '', amount: '', unit: '' }], namedIngredients: [], instruction: '',
-      }),
+      default: () => new DishModel(),
     },
     edit: {
       type: Boolean,

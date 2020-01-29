@@ -17,7 +17,7 @@ export default Vue.extend({
   props: {
     ingredients: {
       type: Array,
-      default: () => ([]),
+      require: true,
     },
     amount: {
       type: Number,

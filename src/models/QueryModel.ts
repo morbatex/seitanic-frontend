@@ -1,4 +1,4 @@
-export default class Query {
+export default class QueryModel {
   name = '';
   chef = '';
   ingredients: Array<String> = [];

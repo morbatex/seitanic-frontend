@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './components/Home.vue';
+import Home from '@/components/Home.vue';
 
 Vue.use(Router);
 
@@ -12,13 +12,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
-      props: route => ({ query: route.query }),
     },
     {
       path: '/:oid',
-      name: 'home',
+      name: 'homeWithOid',
       component: Home,
-      props: route => ({ query: route.query }),
     },
   ],
 });

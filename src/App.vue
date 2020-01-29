@@ -13,7 +13,7 @@
       </v-dialog>
     </v-app-bar>
     <v-content>
-      <router-view v-bind:userType="userType"></router-view>
+      <router-view></router-view>
     </v-content>
     <v-footer>
       <p>Visit the Repository on <a href="https://github.com/morbatex/seitanic-frontend" target="_blank">Github</a></p>
@@ -23,28 +23,25 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Login from './components/Login.vue';
+import { mapGetters, mapActions } from 'vuex';
+import Login from '@/components/Login.vue';
+import QueryModel from '@/models/QueryModel';
 
 export default Vue.extend({
   name: 'App',
   components: {
     Login,
   },
+  computed: {
+    ...mapGetters({
+      userType: 'getUserType',
+      route: 'getRoute',
+    }),
+  },
   data: () => ({
     logDialog: false,
-    userType: 'UNKNOWN',
   }),
   methods: {
-    getUsertype() {
-      const self = this;
-      fetch(`${process.env.VUE_APP_API_URL}/user/me`, {
-        credentials: 'include',
-      })
-        .then(response => response.json())
-        .then((userType) => {
-          self.userType = userType;
-        });
-    },
     login(user: string) {
       fetch(`${process.env.VUE_APP_API_URL}/login`, {
         method: 'POST',
@@ -57,12 +54,24 @@ export default Vue.extend({
       })
         .then(() => {
           this.logDialog = false;
-          this.getUsertype();
+          this.getUserType();
         });
     },
+    ...mapActions({
+      getUserType: 'updateUserType',
+      getDishes: 'updateDishes',
+    }),
   },
   created() {
-    this.getUsertype();
+    this.getUserType();
+    const { query } = this.route;
+    this.getDishes({
+      name: query.name ? query.name : '',
+      chef: query.chef ? query.chef : '',
+      ingredients: query.ingredients ? JSON.parse(query.ingredients) : [],
+      exgredients: query.exgredients ? JSON.parse(query.exgredients) : [],
+      categories: [],
+    });
   },
 });
 </script>
