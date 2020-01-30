@@ -7,6 +7,6 @@ export default class DishModel {
   ingredients: Array<IngredientModel> = [];
   namedIngredients: Array<NamedIngredientModel> = [];
   instruction = '';
-  categories: Array<String> = [];
+  tags: Array<String> = [];
   _id = { $oid: '' };
 }

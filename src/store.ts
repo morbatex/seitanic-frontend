@@ -61,7 +61,7 @@ export default new Vuex.Store<MyState>({
       queryString = queryString.concat(query.chef === '' ? '' : `chef=${query.chef}&`);
       queryString = queryString.concat(query.ingredients.length === 0 ? '' : `ingredients=${JSON.stringify(query.ingredients)}&`);
       queryString = queryString.concat(query.exgredients.length === 0 ? '' : `exgredients=${JSON.stringify(query.exgredients)}&`);
-      queryString = queryString.concat(query.categories.length === 0 ? '' : `categories=${JSON.stringify(query.categories)}`);
+      queryString = queryString.concat(query.tags.length === 0 ? '' : `tags=${JSON.stringify(query.tags)}`);
       fetch(`${process.env.VUE_APP_API_URL}/dish${encodeURI(queryString)}`)
         .then(response => response.json())
         .then(dishes => context.commit('updateDishes', dishes));

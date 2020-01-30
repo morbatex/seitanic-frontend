@@ -3,5 +3,5 @@ export default class QueryModel {
   chef = '';
   ingredients: Array<String> = [];
   exgredients: Array<String> = [];
-  categories: Array<String> = [];
+  tags: Array<String> = [];
 }

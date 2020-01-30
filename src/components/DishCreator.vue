@@ -95,7 +95,7 @@
       </v-tabs-items>
     </v-container>
     <v-btn v-if="!edit" v-on:click="$emit('finalized-dish', finalizeDish())">Add Dish</v-btn>
-    <v-btn v-if="edit" v-on:click="$emit('finalized-dish', finalizeDish())">Edit Dish</v-btn>
+    <v-btn v-else v-on:click="$emit('finalized-dish', finalizeDish())">Edit Dish</v-btn>
   </v-container>
 </template>
 
@@ -121,11 +121,6 @@ export default Vue.extend({
   components: {
     VueMarkdown,
     draggable,
-  },
-  computed: {
-    ...mapGetters({
-      query: 'getQuery',
-    }),
   },
   mounted() {
     this.name = this.dish.name;
