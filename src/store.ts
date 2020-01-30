@@ -39,7 +39,7 @@ export default new Vuex.Store<MyState>({
     },
   },
   actions: {
-    updateDishes(context, query : QueryModel) {
+    updateDishes(context, query : QueryModel = context.state.query) {
       let path;
       if (!context.state.route || !context.state.route.params.oid) {
         path = '';

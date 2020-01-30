@@ -190,7 +190,7 @@ export default Vue.extend({
         this.ingredients = [new IngredientModel()];
         this.namedIngredients = [];
       }
-      fetch(path, options).then(() => this.updateDishes(this.query));
+      fetch(path, options).then(() => this.updateDishes());
     },
     ...mapActions({
       updateDishes: 'updateDishes',
