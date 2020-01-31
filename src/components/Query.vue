@@ -24,6 +24,13 @@
   </v-row>
   <v-row>
     <v-col>
+      <v-combobox v-model="tags"
+          prefix="Tags:" clearable chips deletable-chips multiple solo>
+      </v-combobox>
+    </v-col>
+  </v-row>
+  <v-row>
+    <v-col>
       <v-btn v-on:click="$emit('finalized-query', finalizeQuery())">Find
       </v-btn>
     </v-col>
@@ -40,8 +47,9 @@ export default Vue.extend({
   data: () => {
     const ingr: string[] = [];
     const exgr: string[] = [];
+    const tags: string[] = [];
     return {
-      name: '', chef: '', ingredients: ingr, exgredients: exgr,
+      name: '', chef: '', ingredients: ingr, exgredients: exgr, tags,
     };
   },
   computed: {
@@ -54,6 +62,7 @@ export default Vue.extend({
     this.chef = this.query.chef;
     this.ingredients = [...this.query.ingredients];
     this.exgredients = [...this.query.exgredients];
+    this.tags = [...this.query.tags];
   },
   methods: {
     remove_ingredient(item: string) {
@@ -68,6 +77,7 @@ export default Vue.extend({
       q.chef = this.chef;
       q.ingredients = this.ingredients;
       q.exgredients = this.exgredients;
+      q.tags = this.tags;
       this.updateDishes(q);
     },
     ...mapActions({

@@ -7,6 +7,9 @@
       <v-col>
         <v-combobox v-model='chefs' prefix="Chefs:" chips deletable-chips solo multiple ></v-combobox>
       </v-col>
+      <v-col>
+        <v-combobox v-model='tags' prefix="Tags:" chips deletable-chips solo multiple ></v-combobox>
+      </v-col>
     </v-row>
     <draggable v-model="ingredients" style="margin-bottom: 15px">
       <v-card v-for="(ingredient, index) in ingredients" v-bind:key="index*1" :hover=true style="cursor: ns-resize;">
@@ -114,8 +117,9 @@ export default Vue.extend({
   data: () => {
     const ing = [new IngredientModel()];
     const named: NamedIngredientModel[] = [];
+    const tags: string[] = [];
     return {
-      name: '', chefs: [], ingredients: ing, namedIngredients: named, instruction: '', tab: null,
+      name: '', chefs: [], ingredients: ing, namedIngredients: named, instruction: '', tags, tab: null,
     };
   },
   components: {
@@ -127,8 +131,9 @@ export default Vue.extend({
     // @ts-ignore
     this.chefs = this.dish.chefs.map(x => x.name);
     this.ingredients = [...this.dish.ingredients];
-    this.namedIngredients = this.dish.namedIngredients != null ? [...this.dish.namedIngredients] : [];
+    this.namedIngredients = [...this.dish.namedIngredients];
     this.instruction = this.dish.instruction;
+    this.tags = [...this.dish.tags];
     if (!this.ingredients.length) {
       this.ingredients.push(new IngredientModel());
     }
@@ -154,7 +159,7 @@ export default Vue.extend({
     },
     finalizeDish() {
       const dish = JSON.stringify({
-        name: this.name, chefs: this.chefs.map(chef => ({ name: chef })), ingredients: this.ingredients.filter(ingredient => ingredient.name !== '' || ingredient.amount !== '' || ingredient.unit !== ''), namedIngredients: this.namedIngredients, instruction: this.instruction,
+        name: this.name, chefs: this.chefs.map(chef => ({ name: chef })), ingredients: this.ingredients.filter(ingredient => ingredient.name !== '' || ingredient.amount !== '' || ingredient.unit !== ''), namedIngredients: this.namedIngredients, instruction: this.instruction, tags: this.tags,
       });
       let path = `${process.env.VUE_APP_API_URL}/dish`;
       let options: RequestInit;

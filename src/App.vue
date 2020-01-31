@@ -70,7 +70,7 @@ export default Vue.extend({
       chef: query.chef ? query.chef : '',
       ingredients: query.ingredients ? JSON.parse(query.ingredients) : [],
       exgredients: query.exgredients ? JSON.parse(query.exgredients) : [],
-      tags: [],
+      tags: query.tags ? JSON.parse(query.tags) : [],
     });
   },
 });

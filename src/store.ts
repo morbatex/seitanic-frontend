@@ -53,6 +53,7 @@ export default new Vuex.Store<MyState>({
           chef: query.chef !== '' ? query.chef : undefined,
           ingredients: query.ingredients.length > 0 ? JSON.stringify(query.ingredients) : undefined,
           exgredients: query.exgredients.length > 0 ? JSON.stringify(query.exgredients) : undefined,
+          tags: query.tags.length > 0 ? JSON.stringify(query.tags) : undefined,
         },
       });
       context.commit('updateQuery', query);
