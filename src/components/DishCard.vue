@@ -7,14 +7,9 @@
       </div>
     </v-card-title>
     <v-simple-table>
-      <tbody v-if="dish.ingredients.length > 1">
-        <tr v-for="(ingredient, index) in dish.ingredients" :key="index">
-          <td v-if="index <=4">{{ ingredient.name }}</td>
-        </tr>
-      </tbody>
-      <tbody v-else-if="dish.namedIngredients !== null && dish.namedIngredients.length > 0">
-        <tr v-for="(ingredient, index) in dish.namedIngredients[0].ingredients" :key="index">
-          <td v-if="index <=4">{{ ingredient.name }}</td>
+      <tbody>
+        <tr v-for="(ingredient, index) in diplayedIngredients" :key="index">
+          <td>{{ ingredient.name }}</td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -38,6 +33,12 @@ export default Vue.extend({
     if (this.$route.params.oid === this.dish._id.$oid) {
       this.overlay = true;
     }
+  },
+  computed: {
+    diplayedIngredients(): Array<any> {
+      // @ts-ignore
+      return this.dish.namedIngredients.reduce((acc, cur) => acc.concat(cur.ingredients), this.dish.ingredients).slice(0, 5);
+    },
   },
   data: () => ({
     overlay: false,

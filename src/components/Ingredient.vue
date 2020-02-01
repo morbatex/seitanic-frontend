@@ -2,9 +2,9 @@
   <v-simple-table>
     <tbody>
       <tr v-for="(ingredient,index) in ingredients" :key="index">
-        <td v-if="index <= (amount ? amount : ingredients.length)" class="ma-auto pa-auto">{{ ingredient.name }}</td>
-        <td v-if="index <= (amount ? amount : ingredients.length)" class="ma-auto pa-auto">{{ ingredient.amount }}</td>
-        <td v-if="index <= (amount ? amount : ingredients.length)" class="ma-auto pa-auto">{{ ingredient.unit }}</td>
+        <td class="ma-auto pa-auto">{{ ingredient.name }}</td>
+        <td class="ma-auto pa-auto">{{ ingredient.amount }}</td>
+        <td class="ma-auto pa-auto">{{ ingredient.unit }}</td>
       </tr>
     </tbody>
   </v-simple-table>
@@ -18,10 +18,6 @@ export default Vue.extend({
     ingredients: {
       type: Array,
       require: true,
-    },
-    amount: {
-      type: Number,
-      default: 0,
     },
   },
 });
