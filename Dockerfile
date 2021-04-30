@@ -8,3 +8,5 @@ ENTRYPOINT ["/entrypoint.sh"]
 RUN apk update && apk upgrade
 COPY --from=0 /usr/src/app/dist /static
 COPY entrypoint.sh /
+RUN rm -rf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
