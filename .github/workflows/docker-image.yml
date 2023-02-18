@@ -15,6 +15,9 @@ jobs:
         id: read_version
         uses: Saionaro/extract-package-version@v1.2.1
 
+      - name: Print version
+        run: echo ${{ steps.read_version.outputs.version }} ${{ github.sha }}
+
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
