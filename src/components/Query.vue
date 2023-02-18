@@ -44,6 +44,7 @@ import { mapGetters, mapActions } from 'vuex';
 import QueryModel from '@/models/QueryModel';
 
 export default Vue.extend({
+  name: 'QueryComponent',
   data: () => {
     const ingr: string[] = [];
     const exgr: string[] = [];

@@ -16,6 +16,7 @@ import DishView from '@/components/DishView.vue';
 import Query from '@/components/Query.vue';
 
 export default Vue.extend({
+  name: 'HomeComponent',
   components: {
     DishView,
     Query,

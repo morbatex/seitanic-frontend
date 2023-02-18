@@ -21,8 +21,8 @@
 <script lang="ts">
 import Vue from 'vue';
 
-
 export default Vue.extend({
+  name: 'LoginComponent',
   data: () => ({ username: '', password: '' }),
   methods: {
     finalizeLogin(): string {

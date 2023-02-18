@@ -2,8 +2,8 @@
   <v-container>
     <h2 >{{ dish.name }} by
       <div style="display:inline-block" v-for="(chef,index) in dish.chefs" v-bind:key="'chef' + index">
-        <p v-if="index !== dish.chefs.length - 1"><a v-on:click="filterChef(chef.name)" style="display: inline">{{ chef.name }}</a> &amp;&nbsp;</p>
-        <a v-on:click="filterChef(chef.name)" style="display: inline" v-if="index === dish.chefs.length - 1">{{ chef.name }}</a>
+        <p v-if="index !== dish.chefs.length - 1"><a v-on:keydown="() => {}" v-on:click="filterChef(chef.name)" style="display: inline">{{ chef.name }}</a> &amp;&nbsp;</p>
+        <a v-on:keydown="() => {}" v-on:click="filterChef(chef.name)" style="display: inline" v-if="index === dish.chefs.length - 1">{{ chef.name }}</a>
       </div>
       <div style="display:inline-block" v-for="(tag, index) in dish.tags" v-bind:key="'tag' + index">
         <v-chip style="margin-left: 10px" v-on:click=filterTag(tag)>{{ tag }}</v-chip>
@@ -23,7 +23,6 @@
   </v-container>
 </template>
 
-
 <script lang="ts">
 import Vue from 'vue';
 // @ts-ignore
@@ -31,7 +30,6 @@ import VueMarkdown from 'vue-markdown-v2';
 import { mapGetters, mapActions } from 'vuex';
 import Ingredient from '@/components/Ingredient.vue';
 import DishCreator from '@/components/DishCreator.vue';
-import QueryModel from '@/models/QueryModel';
 
 export default Vue.extend({
   name: 'App',

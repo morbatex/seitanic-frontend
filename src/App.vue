@@ -12,9 +12,9 @@
         <Login v-on:finalized-login="login" style="background: #303030"></Login>
       </v-dialog>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <router-view></router-view>
-    </v-content>
+    </v-main>
     <v-footer>
       <p>Visit the Repository on <a href="https://github.com/morbatex/seitanic-frontend" target="_blank">Github</a></p>
     </v-footer>
@@ -25,7 +25,6 @@
 import Vue from 'vue';
 import { mapGetters, mapActions } from 'vuex';
 import Login from '@/components/Login.vue';
-import QueryModel from '@/models/QueryModel';
 
 export default Vue.extend({
   name: 'App',

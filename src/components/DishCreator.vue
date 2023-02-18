@@ -108,7 +108,7 @@ import Vue from 'vue';
 import VueMarkdown from 'vue-markdown-v2';
 // @ts-ignore
 import draggable from 'vuedraggable';
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import DishModel from '@/models/DishModel';
 import IngredientModel from '@/models/IngredientModel';
 import NamedIngredientModel from '@/models/NamedIngredientModel';
@@ -129,7 +129,7 @@ export default Vue.extend({
   mounted() {
     this.name = this.dish.name;
     // @ts-ignore
-    this.chefs = this.dish.chefs.map(x => x.name);
+    this.chefs = this.dish.chefs.map((x) => x.name);
     this.ingredients = [...this.dish.ingredients];
     this.namedIngredients = [...this.dish.namedIngredients];
     this.instruction = this.dish.instruction;
@@ -159,10 +159,10 @@ export default Vue.extend({
     },
     finalizeDish() {
       const dish = JSON.stringify({
-        name: this.name, chefs: this.chefs.map(chef => ({ name: chef })), ingredients: this.ingredients.filter(ingredient => ingredient.name !== '' || ingredient.amount !== '' || ingredient.unit !== ''), namedIngredients: this.namedIngredients, instruction: this.instruction, tags: this.tags,
+        name: this.name, chefs: this.chefs.map((chef) => ({ name: chef })), ingredients: this.ingredients.filter((ingredient) => ingredient.name !== '' || ingredient.amount !== '' || ingredient.unit !== ''), namedIngredients: this.namedIngredients, instruction: this.instruction, tags: this.tags,
       });
       let path = `${process.env.VUE_APP_API_URL}/dish`;
-      let options: RequestInit;
+      let options;
       if (this.edit) {
         path = `${path}/${this.dish._id.$oid}`;
         options = {

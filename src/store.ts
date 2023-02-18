@@ -22,10 +22,10 @@ export default new Vuex.Store<MyState>({
     route: undefined,
   },
   getters: {
-    getUserType: state => state.userType,
-    getDishes: state => state.dishes,
-    getQuery: state => state.query,
-    getRoute: state => state.route,
+    getUserType: (state) => state.userType,
+    getDishes: (state) => state.dishes,
+    getQuery: (state) => state.query,
+    getRoute: (state) => state.route,
   },
   mutations: {
     updateDishes(state, dishes: Array<DishModel>) {
@@ -64,13 +64,13 @@ export default new Vuex.Store<MyState>({
       queryString = queryString.concat(query.exgredients.length === 0 ? '' : `exgredients=${JSON.stringify(query.exgredients)}&`);
       queryString = queryString.concat(query.tags.length === 0 ? '' : `tags=${JSON.stringify(query.tags)}`);
       fetch(`${process.env.VUE_APP_API_URL}/dish${encodeURI(queryString)}`)
-        .then(response => response.json())
-        .then(dishes => context.commit('updateDishes', dishes));
+        .then((response) => response.json())
+        .then((dishes) => context.commit('updateDishes', dishes));
     },
     updateUserType(context) {
       fetch(`${process.env.VUE_APP_API_URL}/user/me`, { credentials: 'include' })
-        .then(response => response.json())
-        .then(userType => context.commit('updateUserType', userType));
+        .then((response) => response.json())
+        .then((userType) => context.commit('updateUserType', userType));
     },
   },
 });
