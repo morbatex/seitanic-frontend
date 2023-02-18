@@ -5,17 +5,13 @@ on:
     branches: [ master ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    
       - name: Check Out Repo 
         uses: actions/checkout@v2
         
-    - name: Read Version
+      - name: Read Version
         id: read_version
         uses: Saionaro/extract-package-version@v1.2.1
 
